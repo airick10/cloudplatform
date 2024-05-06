@@ -2,6 +2,9 @@
 	//Start session
 	session_start();
 
+	//Include Password Hash File
+	require 'password.php';
+
 	//Include database connection details
 	include ("code.inc");
 
@@ -48,13 +51,23 @@ die('Could not connect: ' . mysql_error());
 	if($errflag) {
 		$_SESSION['ERRMSG_ARR'] = $errmsg_arr;
 		session_write_close();
-		header("location: http://www.rontoe.com/cloud");
+		header("location: index.php");
 		exit();
 	}
 
+	$result = False;
 	//Create query
-	$qry="SELECT * FROM logins WHERE Name='$login' AND Pass='$password'";
-	$result=mysql_query($qry) or die ("Error in query: $query. ".mysql_error());
+	//$qry="SELECT * FROM logins WHERE Name='$login' AND Pass='$password'";
+	//$result=mysql_query($qry) or die ("Error in query: $query. ".mysql_error());
+	$request = mysqli_query($con, "SELECT * FROM logins WHERE Name = '$login'") or die("Could not connect: " . mysql_error()); ;
+	while($row = mysqli_fetch_array($request)) {
+		$hash = $row['Pass'];
+		if (password_verify($password, $hash)) {
+			$result = True;
+		} else {
+			$result = False;
+		}
+	}
 
 	//Check whether the query was successful or not
 	if($result) {
@@ -69,7 +82,7 @@ die('Could not connect: ' . mysql_error());
 			$_SESSION['SESS_DATE'] = $date;
 			session_write_close();
 			mysql_query("UPDATE logins SET LoginDate = '$date' WHERE Name = '$name'");
-			header("location: http://www.rontoe.com/cloud");
+			header("location: index.php");
 			exit();
 		}else {
 			//Login failed
