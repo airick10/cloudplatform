@@ -1,0 +1,36 @@
+Database Structure
+Database: vmcloud
+	Table: hosts
+		ID: int(5) - pk
+		Host: varchar(25)
+		Status: varchar(10
+		IP: varchar(30)
+		Version: varchar(5)
+		CPU: int(5)
+		RAM: int(10)
+		RAM Used: double
+	Table: logins
+		ID: int(5) - pk
+		Name: varchar(20)
+		Pass: varchar(50)
+		EMail: varchar(50)
+		LoginDate: date
+	Table: snapshots
+		ID: int(5)
+		VMID: int(5)
+		Date: date
+		Name: varchar(100)
+		Description: varchar(100)
+	Table: vm
+		ID: int(5) - pk
+		Hostname: varchar(25)
+		Status: varchar(10)
+		Host: int(5)
+		Folder: varchar(10)
+		IP: varchar(30)
+		CPU: int(5)
+		RAM: int(5)
+		Platform: varchar(10)
+		OS: varchar(15)
+		Created: date
+		Owner: varchar(50)
