@@ -54,7 +54,7 @@ echo "<center><div id='loginnew' class='popupbox'>";
 			echo "<input id='password' placeholder='Password' type='password'>";
 		echo "</div>";
 		echo "<div class='loginfooter'>";
-			echo "<button id='buttonsub' type='button'>Sign In</button>";
+			echo "<button id='buttonsub' type='submit'>Sign In</button>";
 		echo "</div>";
 	echo "</div></form>";
 echo "</div></center>";
