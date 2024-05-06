@@ -15,14 +15,14 @@
 	$errflag = false;
 
 	//Connect to mysql server
-	$con = mysql_connect($serverhost,$account,$key);
+	$con = mysqli_connect($serverhost,$account,$key);
 	if (!$con)
 {
-die('Could not connect: ' . mysql_error());
+die('Could not connect: ' . mysqli_error());
 }
 
 	//Select database
-	mysql_select_db("vmcloud", $con);
+	mysqli_select_db("vmcloud", $con);
 
 	//Function to sanitize values received from the form. Prevents SQL injection
 	//function clean($str) {
@@ -74,7 +74,7 @@ die('Could not connect: ' . mysql_error());
 		if(mysql_num_rows($result) == 1) {
 			//Login Successful
 			session_regenerate_id();
-			$member = mysql_fetch_array($result);
+			$member = mysqli_fetch_array($request);
 			$date = date("Y-m-d H:i:s");
 			$name = $member['Name'];			
 			$_SESSION['SESS_NAME'] = $member['Name'];
